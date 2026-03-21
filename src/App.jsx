@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios';
+const BASE_URL = "https://fruit-disease-backend.onrender.com";
 
 const App = () => {
   const [image, setimage] = useState(null);
@@ -16,7 +17,7 @@ const App = () => {
 
   const fetchhistory = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/history");
+      const res = await axios.get(`${BASE_URL}/history`);
       sethistory(res.data);
     } catch (error) {
       console.log(error)
@@ -36,7 +37,7 @@ const App = () => {
     formData.append("fruit",fruit)
     try {
       const res = await axios.post(
-        "http://localhost:3000/upload",
+        `${BASE_URL}/upload`,
         formData
       );
       setresult(res.data.infected_area);
@@ -107,7 +108,7 @@ const App = () => {
               }}
             >
               
-              <img src={`http://localhost:3000/${item.image}`} 
+              <img src={`${BASE_URL}/uploads/${item.image.split("\\").pop()}`} 
               alt="fruit"
               style={{width:"100%",borderRadius:"8px"}}
               />
@@ -120,7 +121,7 @@ const App = () => {
               </p>
               <button
               onClick={async () => {
-                await axios.delete(`http://localhost:3000/delete/${item._id}`);
+                await axios.delete(`http://${BASE_URL}/delete/${item._id}`);
                 fetchhistory()
               }}
               style={{
