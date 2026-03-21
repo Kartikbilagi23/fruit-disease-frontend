@@ -108,7 +108,7 @@ const App = () => {
               }}
             >
               
-              <img src={`${BASE_URL}/uploads/${item.image.split("\\").pop()}`} 
+              <img src={`${BASE_URL}/uploads/${item.image}`} 
               alt="fruit"
               style={{width:"100%",borderRadius:"8px"}}
               />
@@ -121,7 +121,7 @@ const App = () => {
               </p>
               <button
               onClick={async () => {
-                await axios.delete(`http://${BASE_URL}/delete/${item._id}`);
+                await axios.delete(`${BASE_URL}/delete/${item._id}`);
                 fetchhistory()
               }}
               style={{
